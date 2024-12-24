@@ -60,6 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function addDaysToDateTime(daysToAdd) {
+        const now = new Date();
+        now.setDate(now.getDate() + daysToAdd);
+    
+        const formattedDate = now.toISOString().split('T')[0]; // Format YYYY-MM-DD
+        const formattedTime = now.toTimeString().split(' ')[0].slice(0, 5); // Format HH:mm
+    
+        return `${formattedDate} ${formattedTime}`; // Combine date et heure
+    }
 
     const form = document.getElementById('productForm');
 
@@ -73,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 marque: brandElement.value,
                 ingredients: ingredientsElement.value,
                 code_scanne: barcodeElement.value,                
-                jours: expirationElement.value
+                jours: expirationElement.value,
+                date_expiration: addDaysToDateTime(expirationElement.value)
             };
 
             const responseRender = await fetch('https://scan-app-server.onrender.com/api/produits', {

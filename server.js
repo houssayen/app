@@ -40,17 +40,17 @@ app.get('/api/produits', async (req, res) => {
 });
 
 app.post('/api/produits', async (req, res) => {
-    const { nom, marque, ingredients, code_scanne, jours } = req.body; // Supposons que ces champs sont envoyés dans le corps de la requête
+    const { nom, marque, ingredients, code_scanne, jours, date_expiration } = req.body; // Supposons que ces champs sont envoyés dans le corps de la requête
 
     // Vérification de la présence des champs requis
-    if (!nom || !marque || !ingredients || !code_scanne || !jours) {
+    if (!nom || !marque || !ingredients || !code_scanne || !jours || !date_expiration) {
         return res.status(400).json({ error: 'Données manquantes.' });
     }
 
     try {
         const result = await pool.query(
-            'INSERT INTO produits (nom_produit, marque, ingredients, code_scanne, jours) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [nom, marque, ingredients, code_scanne, jours]
+            'INSERT INTO produits (nom_produit, marque, ingredients, code_scanne, jours, date_expiration) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            [nom, marque, ingredients, code_scanne, jours, date_expiration]
         );
         res.status(201).json(result.rows[0]); // Retourne le produit inséré avec un statut 201 (Créé)
     } catch (error) {
