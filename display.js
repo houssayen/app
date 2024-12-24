@@ -15,12 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             produits.forEach(produit => {
                 const row = document.createElement('tr');
-                row.innerHTML = 
-                `
-                <td>${produit.code_scanne}</td>
+                row.innerHTML = `               
                 <td>${produit.nom_produit}</td>
-                <td>${produit.marque}</td>
-                <td>${produit.ingredients}</td>
+                <td>${produit.marque}</td>               
                 <td>${produit.created_at}</td>    
                 `;
                 tableBody.appendChild(row);
