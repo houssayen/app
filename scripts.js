@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (result.status === 1) {
                 const product = result.product;
+
                 productNameElement.value = product.product_name;
                 brandElement.value = product.brands;
                 ingredientsElement.value = product.ingredients_text;
@@ -71,9 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 nom: productNameElement.value,
                 marque: brandElement.value,
                 ingredients: ingredientsElement.value,
-                code_scanne: barcodeElement.value,
-                jours: barcodeElement.value,
-                expirationElement: expirationElement.value
+                code_scanne: barcodeElement.value,                
+                jours: expirationElement.value
             };
 
             const responseRender = await fetch('https://scan-app-server.onrender.com/api/produits', {
