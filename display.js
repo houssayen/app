@@ -1,27 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    function formatDateTimeWithLocation(dateTime) {
-
-        const dateObj = new Date(dateTime);
-        const dateLocal = dateObj.toLocaleDateString('fr-FR');
-        const timeLocal = dateObj.toLocaleTimeString('fr-FR', {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
-
-        return `${dateLocal} - ${timeLocal}`;
-    }
-
     function formatDateTime(dateTime) {
-
         const dateObj = new Date(dateTime);
         // Formater la date (YYYY-MM-DD) en UTC
         const dateLocal = dateObj.toISOString().split('T')[0];  // Format : YYYY-MM-DD (UTC)
-
         // Extraire l'heure et les minutes (HH:mm) en UTC
         const hours = String(dateObj.getUTCHours()).padStart(2, '0');  // Assure que l'heure est toujours sur 2 chiffres
         const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');  // Assure que les minutes sont sur 2 chiffres
-
         // Retourner la date et l'heure sous le format "YYYY-MM-DD - HH:mm" en UTC
         return `${dateLocal} - ${hours}:${minutes}`;
     }
@@ -43,8 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             produits.forEach(produit => {
                 const row = document.createElement('tr');
-                row.innerHTML = `       
-                    <td>${formatDateTimeWithLocation(produit.created_at)}</td>        
+                row.innerHTML = `                                
                     <td>${produit.nom_produit}</td>              
                     <td>${`${produit.jours}j`}</td>              
                     <td>${formatDateTime(produit.date_expiration)}</td>              
