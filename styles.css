@@ -1,26 +1,7 @@
- 
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-}
-
 #interactive {
   width: 100%;
-  max-width: 800px;
-  margin: auto;
+  max-height: 300px;
+  overflow: hidden;
+  margin-top: 20px;
+  border: 1px solid #ddd;
 }
-
-#product-info {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-}
-
-table{
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-}
- 
