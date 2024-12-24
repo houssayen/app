@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.innerHTML = `       
                 <td>${`${dateLocal} - ${timeLocal}`}</td>        
                 <td>${produit.nom_produit}</td>              
+                <td>${`${produit.jours}j`}</td>              
                 `;
                 tableBody.appendChild(row);
             });

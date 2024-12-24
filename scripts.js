@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const brandElement = document.getElementById('brand');
     const ingredientsElement = document.getElementById('ingredients');
     const barcodeElement = document.getElementById('barcode');
+    const expirationElement = document.getElementById('expiration');
 
     // Initialiser Quagga pour scanner le code-barres
     Quagga.init({
@@ -71,6 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 marque: brandElement.value,
                 ingredients: ingredientsElement.value,
                 code_scanne: barcodeElement.value,
+                jours: barcodeElement.value,
+                expirationElement: expirationElement.value
             };
 
             const responseRender = await fetch('https://scan-app-server.onrender.com/api/produits', {
