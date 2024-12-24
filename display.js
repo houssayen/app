@@ -14,11 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
             tableBody.innerHTML = '';
 
             produits.forEach(produit => {
+
+                const dateObj = new Date(produit.created_at);
+                const dateLocal = dateObj.toLocaleDateString('fr-FR');
+                const timeLocal = dateObj.toLocaleTimeString('fr-FR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                });
+
                 const row = document.createElement('tr');
                 row.innerHTML = `               
-                <td>${produit.nom_produit}</td>
-                <td>${produit.marque}</td>               
-                <td>${produit.created_at}</td>    
+                <td>${produit.nom_produit}</td>                              
+                <td>${`${dateLocal} - ${timeLocal}`}</td>    
                 `;
                 tableBody.appendChild(row);
             });
