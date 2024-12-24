@@ -62,12 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addDaysToDateTime(daysToAdd) {
         const now = new Date();
-        now.setDate(now.getDate() + daysToAdd);
-    
-        const formattedDate = now.toISOString().split('T')[0]; // Format YYYY-MM-DD
-        const formattedTime = now.toTimeString().split(' ')[0].slice(0, 5); // Format HH:mm
-    
-        return `${formattedDate} ${formattedTime}`; // Combine date et heure
+        // Ajouter directement les jours au temps UNIX
+        const newTimestamp = now.getTime() + daysToAdd * 24 * 60 * 60 * 1000;
+        // Créer une nouvelle date basée sur le timestamp ajusté
+        const newDate = new Date(newTimestamp);
+        // Formater la date et l'heure
+        const formattedDate = newDate.toLocaleDateString("en-CA"); // Format YYYY-MM-DD (standard)
+        const formattedTime = newDate.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+        }); // Format HH:mm (24 heures)
+
+        return `${formattedDate} ${formattedTime}`;
     }
 
     const form = document.getElementById('productForm');
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 nom: productNameElement.value,
                 marque: brandElement.value,
                 ingredients: ingredientsElement.value,
-                code_scanne: barcodeElement.value,                
+                code_scanne: barcodeElement.value,
                 jours: expirationElement.value,
                 date_expiration: addDaysToDateTime(expirationElement.value)
             };
@@ -95,10 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (responseRender.ok) {
-                const baseUrl = 'https://houssayen.github.io/';           
+                const baseUrl = 'https://houssayen.github.io/';
                 const pageToGo = 'app/products.html';
-                const fullUrl = baseUrl + pageToGo;              
-                window.location.href = fullUrl;       
+                const fullUrl = baseUrl + pageToGo;
+                window.location.href = fullUrl;
             } else {
                 throw new Error(responseRender.message);
             }

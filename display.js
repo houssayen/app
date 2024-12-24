@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    function formatDateTime(dateTime) {
+
+        const dateObj = new Date(dateTime);
+        const dateLocal = dateObj.toLocaleDateString('fr-FR');
+        const timeLocal = dateObj.toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+
+        return `${dateLocal} - ${timeLocal}`;
+    }
+    
     async function afficherProduits() {
         try {
             //const response = await fetch('http://localhost:3000/api/produits', { method: 'GET' });
@@ -14,20 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tableBody.innerHTML = '';
 
             produits.forEach(produit => {
-
-                const dateObj = new Date(produit.created_at);
-                const dateLocal = dateObj.toLocaleDateString('fr-FR');
-                const timeLocal = dateObj.toLocaleTimeString('fr-FR', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                });
-
                 const row = document.createElement('tr');
                 row.innerHTML = `       
-                <td>${`${dateLocal} - ${timeLocal}`}</td>        
-                <td>${produit.nom_produit}</td>              
-                <td>${`${produit.jours}j`}</td>              
-                <td>${`${produit.date_expiration}j`}</td>              
+                    <td>${formatDateTime(produit_created_at)}</td>        
+                    <td>${produit.nom_produit}</td>              
+                    <td>${`${produit.jours}j`}</td>              
+                    <td>${formatDateTime(produit.date_expiration)}</td>              
                 `;
                 tableBody.appendChild(row);
             });
