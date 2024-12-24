@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             produits.forEach(produit => {
                 const row = document.createElement('tr');
                 row.innerHTML = `                                
-                    <td>${produit.nom_produit}</td>              
-                    <td>${`${produit.jours}j`}</td>              
+                    <td>${produit.nom_produit}</td>                           
                     <td>${formatDateTime(produit.date_expiration)}</td>              
                 `;
                 tableBody.appendChild(row);
