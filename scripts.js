@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Arrêter le scanner après détection réussie
                 Quagga.stop();
+                document.getElementById('interactive').style.display = 'none';
                 //alert("Produit trouvé : " + (product.product_name || "Nom indisponible"));
             } else {
                 productNameElement.value = "Produit non trouvé";
