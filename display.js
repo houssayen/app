@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const row = document.createElement('tr');
                 row.innerHTML = `       
-                 <td>${`${dateLocal} - ${timeLocal}`}</td>        
+                <td>${`${dateLocal} - ${timeLocal}`}</td>        
                 <td>${produit.nom_produit}</td>              
                 `;
                 tableBody.appendChild(row);
