@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+   const form = document.getElementById('productForm');
     const productNameElement = document.getElementById('product-name');
     const brandElement = document.getElementById('brand');
     const ingredientsElement = document.getElementById('ingredients');
@@ -42,16 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.status === 1) {
-                const product = result.product;
 
+                // Afficher le spinner
+                spinnerOverlay.classList.remove('d-none');
+                // Masquer le spinner après 5 secondes
+                setTimeout(() => {
+                    spinnerOverlay.classList.add('d-none');
+                }, 3000);
+
+                const product = result.product;
                 productNameElement.value = product.product_name;
                 brandElement.value = product.brands;
                 ingredientsElement.value = product.ingredients_text;
-
-                // Arrêter le scanner après détection réussie
+                
                 Quagga.stop();
                 document.getElementById('interactive').style.display = 'none';
-                //alert("Produit trouvé : " + (product.product_name || "Nom indisponible"));
+               
             } else {
                 productNameElement.value = "Produit non trouvé";
             }
@@ -76,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${formattedDate} ${formattedTime}`;
     }
 
-    const form = document.getElementById('productForm');
+    
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Empêche la soumission du formulaire
@@ -111,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.log(error);
         }
-
     });
 
 
