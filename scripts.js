@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const spinnerOverlay = document.getElementById('spinner-overlay');
-   const form = document.getElementById('productForm');
+    const form = document.getElementById('productForm');
     const productNameElement = document.getElementById('product-name');
     const brandElement = document.getElementById('brand');
     const ingredientsElement = document.getElementById('ingredients');
@@ -47,19 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Afficher le spinner
                 spinnerOverlay.classList.remove('d-none');
-                // Masquer le spinner après 5 secondes
-                setTimeout(() => {
-                    spinnerOverlay.classList.add('d-none');
-                }, 3000);
+                await sleep(3000);
+                spinnerOverlay.classList.add('d-none');
 
                 const product = result.product;
                 productNameElement.value = product.product_name;
                 brandElement.value = product.brands;
                 ingredientsElement.value = product.ingredients_text;
-                
+
                 Quagga.stop();
                 document.getElementById('interactive').style.display = 'none';
-               
+
             } else {
                 productNameElement.value = "Produit non trouvé";
             }
@@ -83,8 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return `${formattedDate} ${formattedTime}`;
     }
-
-    
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Empêche la soumission du formulaire
