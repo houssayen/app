@@ -45,23 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.status === 1) {
-
-                // Afficher le spinner
                 spinnerOverlay.classList.remove('d-none');
                 await sleep(3000);
                 spinnerOverlay.classList.add('d-none');
-
                 const product = result.product;
                 productNameElement.value = product.product_name;
                 brandElement.value = product.brands;
                 ingredientsElement.value = product.ingredients_text;
-
-                Quagga.stop();
                 document.getElementById('interactive').style.display = 'none';
-
-            } else {
-                productNameElement.value = "Produit non trouvé";
+                Quagga.stop();
             }
+
         } catch (error) {
             console.error("Erreur lors de la récupération des données :", error);
         }
